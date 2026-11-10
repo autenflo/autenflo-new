@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /home-original.html
 
-Sitemap: https://autenflo.com/sitemap-index.xml
+Sitemap: https://autenflo.com/sitemap.xml
