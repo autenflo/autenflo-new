@@ -1,0 +1,11 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../layouts/Hero.astro';
+import { cities, industries as items, WA } from '../../data/places';
+export const getStaticPaths=()=>items.map(i=>({params:{slug:i.slug},props:{i}}));
+const { i } = Astro.props;
+const wa=`Namaste autenflo, mera business: ${i.name}. Mujhe AI se apne roz ke kaam automate karne hain.`;
+---
+<Base title={`${i.name} ke liye AI Automation | autenflo`} desc={`${i.line} autenflo ka WhatsApp AI agent, follow-up aur reminders Bihar, UP aur Jharkhand ke ${i.name} business ke liye.`.slice(0,158)} ld={[{'@type':'Service',name:`AI automation: ${i.name}`,provider:{'@id':'https://autenflo.com/#org'},areaServed:['Bihar','Uttar Pradesh','Jharkhand'],description:i.line}]} crumbs={[['Home','/'],['Industries','/#industries'],[i.name,`/industry/${i.slug}/`]]}><Hero h1={`${i.e} ${i.name}`} sub={i.line} c="#3b7fd4" m={i.m} cta={wa}/>
+<section class="wrap sec"><h2>Is business ke liye autenflo kahan kaam aata hai</h2><p class="mut prose">{i.line} Hum ise WhatsApp AI agent, auto follow-up aur reminders se sambhalte hain.</p></section>
+<section class="wrap sec"><h2>In shehron me</h2>{cities.map(c=><a class="pill" href={`/city/${c.slug}/`}>{c.name}</a>)}<br/><br/><a class="btn wa" href={WA+encodeURIComponent(wa)}>WhatsApp par baat karein</a></section></Base>
