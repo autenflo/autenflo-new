@@ -2,7 +2,10 @@
 import Base from '../../layouts/Base.astro';
 import Hero from '../../layouts/Hero.astro';
 import { cities, services as items, WA } from '../../data/places';
-export const getStaticPaths=()=>items.map(i=>({params:{slug:i.slug},props:{i}}));
+export function getStaticPaths() {
+  return items.map((item) => ({ params: { slug: item.slug }, props: { i: item } }));
+}
+
 const { i } = Astro.props;
 const wa=`Namaste autenflo, mera business: ${i.name}. Mujhe AI se apne roz ke kaam automate karne hain.`;
 ---
