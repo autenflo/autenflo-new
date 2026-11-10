@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /home-original.html
-
-Sitemap: https://autenflo.com/sitemap-index.xml
