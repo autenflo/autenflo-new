@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../layouts/Hero.astro';
+import { cities, industries, services } from '../data/places';
+const g=(s:string)=>cities.filter(c=>c.state===s);
+---
+<Base title="autenflo | Bihar, UP aur Jharkhand ke business ke liye AI" desc="Bihar, Eastern UP aur Jharkhand ke business ke liye AI automation: WhatsApp AI agent, lead follow-up, social media aur payment reminder. 24x7." ld={[{'@type':'WebSite',name:'autenflo',url:'https://autenflo.com/',inLanguage:'hi-IN'}]}><Hero h1="Business aapka. AI ki power." sub="Bihar, Eastern UP aur Jharkhand ke har shehar ke business ke liye AI: reply, follow-up, marketing aur hisaab, 24x7." c="#3b7fd4" m="chat" cta="Namaste autenflo"/>
+<section class="wrap sec" id="cities"><h2>Aapka shehar</h2>{['Bihar','Uttar Pradesh','Jharkhand'].map(s=><><h3>{s}</h3><div class="grid">{g(s).map(c=><a class="card" href={`/city/${c.slug}/`}><b>{c.name}</b><small>{c.tag}</small></a>)}</div><br/></>)}</section>
+<section class="wrap sec" id="industries"><h2>Aapka business</h2><div class="grid">{industries.map(i=><a class="card" href={`/industry/${i.slug}/`}><b>{i.e} {i.name}</b><small>{i.line}</small></a>)}</div></section>
+<section class="wrap sec" id="services"><h2>Hamari services</h2><div class="grid">{services.map(i=><a class="card" href={`/service/${i.slug}/`}><b>{i.e} {i.name}</b><small>{i.line}</small></a>)}</div></section></Base>
