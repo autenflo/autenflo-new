@@ -1,0 +1,6 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const posts=(await getCollection('blog',p=>!p.data.draft)).sort((a,b)=>+b.data.date-+a.data.date);
+---
+<Base title="Blog: AI aur Business Tips | autenflo" desc="Bihar, UP aur Jharkhand ke business ke liye AI, WhatsApp automation, marketing aur sales ke practical articles." ld={[{'@type':'Blog',name:'autenflo blog',url:'https://autenflo.com/blog/',inLanguage:'hi-IN'}]} crumbs={[['Home','/'],['Blog','/blog/']]}><section class="wrap sec"><h1>Blog</h1><div class="grid">{posts.map(p=><a class="card" href={`/blog/${p.slug}/`}><b>{p.data.title}</b><small>{p.data.description}</small></a>)}</div></section></Base>
