@@ -2,7 +2,10 @@
 import Base from '../../layouts/Base.astro';
 import Hero from '../../layouts/Hero.astro';
 import { cities, industries, services, WA } from '../../data/places';
-export const getStaticPaths=()=>cities.map(c=>({params:{slug:c.slug},props:{c}}));
+export function getStaticPaths() {
+  return cities.map((city) => ({ params: { slug: city.slug }, props: { c: city } }));
+}
+
 const { c } = Astro.props;
 const biz=(c.biz||[]).map(n=>industries.find(i=>i.name===n)).filter(Boolean);
 const near=cities.filter(x=>x.state===c.state&&x.slug!==c.slug);
