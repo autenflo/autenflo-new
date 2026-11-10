@@ -1,0 +1,6 @@
+---
+import { art } from '../lib/art';
+import { WA } from '../data/places';
+const { h1, sub, c, m, cta } = Astro.props;
+---
+<section class="wrap hero" style={`--a:${c}`}><div><h1>{h1}</h1><p class="mut prose">{sub}</p><a class="btn wa" href={WA+encodeURIComponent(cta)}>WhatsApp par baat karein</a></div><div set:html={art(m,c)}/></section>

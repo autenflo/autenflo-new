@@ -1,0 +1,46 @@
+---
+import { cities, industries, services, WA } from '../data/places';
+const { title, desc='autenflo: Business aapka. AI ki power.', image='/og.png', type='website', noindex=false, ld=[], crumbs=[] } = Astro.props;
+const url=new URL(Astro.url.pathname,Astro.site).href, img=new URL(image,Astro.site).href;
+const org={'@type':'Organization','@id':'https://autenflo.com/#org',name:'autenflo',url:'https://autenflo.com/',logo:'https://autenflo.com/logo.png',email:'hello@autenflo.com',telephone:'+918849031907',areaServed:['Bihar','Uttar Pradesh','Jharkhand'],description:'AI automation for businesses in Bihar, Eastern UP and Jharkhand.'};
+const bc=crumbs.length?[{'@type':'BreadcrumbList',itemListElement:crumbs.map(([n,u]:string[],i:number)=>({'@type':'ListItem',position:i+1,name:n,item:new URL(u,Astro.site).href}))}]:[];
+const graph=[org,...bc,...ld].map((o:any)=>({'@context':'https://schema.org',...o}));
+const by=(s:string)=>cities.filter(c=>c.state===s);
+---
+<!doctype html><html lang="hi-IN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{title}</title><meta name="description" content={desc}><link rel="canonical" href={url}>
+<meta name="robots" content={noindex?'noindex,nofollow':'index,follow,max-image-preview:large,max-snippet:-1'}><meta name="theme-color" content="#3b7fd4">
+<meta property="og:site_name" content="autenflo"><meta property="og:locale" content="hi_IN"><meta property="og:type" content={type}><meta property="og:title" content={title}><meta property="og:description" content={desc}><meta property="og:url" content={url}><meta property="og:image" content={img}><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content={title}><meta name="twitter:description" content={desc}><meta name="twitter:image" content={img}>
+<link rel="alternate" type="application/rss+xml" title="autenflo blog" href="/rss.xml"><link rel="sitemap" href="/sitemap-index.xml">
+<script type="application/ld+json" set:html={JSON.stringify(graph)}/>
+<link rel="icon" href="/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&family=Outfit:wght@400..900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6012ZHG9SS"></script><script is:inline>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-6012ZHG9SS')</script>
+<style is:global>
+:root{--bg:#fbfcff;--ink:#17202A;--mut:#566073;--line:#e3e8f2;--a:#3b7fd4;--grad:linear-gradient(110deg,#3b7fd4,#8a62d6 55%,#2f9a7c)}
+*{box-sizing:border-box}html{scroll-padding-top:84px}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.65 Mukta,system-ui,sans-serif;overflow-x:hidden;padding-top:env(safe-area-inset-top,0)}
+h1,h2,h3,.btn{font-family:Outfit,Mukta,sans-serif;line-height:1.1;margin:0 0 .5em}h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:900}h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800}h3{font-size:1.2rem}
+a{color:inherit}.wrap{max-width:1120px;margin:0 auto;padding:0 20px}.sec{padding:56px 0}.mut{color:var(--mut)}
+header{position:sticky;top:0;z-index:20;background:rgba(251,252,255,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}header img{height:30px}
+nav{display:flex;gap:18px;font-weight:600}nav a{text-decoration:none}
+.btn{display:inline-flex;padding:13px 24px;border-radius:999px;background:var(--a);color:#fff;font-weight:700;text-decoration:none}.btn.wa{background:#25D366}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:48px 0}.hero svg{width:100%;height:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{display:block;padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff;text-decoration:none}.card:hover{border-color:var(--a)}.card b{font-family:Outfit}.card small{display:block;color:var(--mut);line-height:1.4;margin-top:4px}
+.pill{display:inline-block;padding:6px 14px;margin:0 8px 8px 0;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:600;font-size:.95rem}
+ul.k{padding-left:1.1em}ul.k li{margin-bottom:.4em}
+footer{border-top:1px solid var(--line);padding:36px 0;color:var(--mut);font-size:.95rem}footer a{display:block;margin:4px 0}.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:20px}
+.prose{max-width:68ch}.prose p{margin:0 0 1em}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding:28px 0}nav a:not(.btn){display:none}body{font-size:17px}.sec{padding:38px 0}}
+@media(prefers-reduced-motion:no-preference){.card{transition:transform .2s,border-color .2s}.card:hover{transform:translateY(-3px)}}
+:focus-visible{outline:3px solid var(--a);outline-offset:3px}
+</style></head><body>
+<header><div class="wrap"><a href="/"><img src="/logo.png" alt="autenflo"></a><nav><a href="/#cities">Cities</a><a href="/#industries">Industries</a><a href="/#services">Services</a><a href="/blog/">Blog</a><a class="btn wa" href={WA+'Namaste%20autenflo'}>WhatsApp</a></nav></div></header>
+<slot/>
+<footer><div class="wrap"><div class="fg">
+<div><b>Bihar</b>{by('Bihar').map(c=><a href={`/city/${c.slug}/`}>{c.name}</a>)}</div>
+<div><b>Uttar Pradesh</b>{by('Uttar Pradesh').map(c=><a href={`/city/${c.slug}/`}>{c.name}</a>)}</div>
+<div><b>Jharkhand</b>{by('Jharkhand').map(c=><a href={`/city/${c.slug}/`}>{c.name}</a>)}</div>
+<div><b>Services</b>{services.map(s=><a href={`/service/${s.slug}/`}>{s.name}</a>)}<a href="/blog/">Blog</a></div></div>
+<p>© autenflo · hello@autenflo.com</p></div></footer></body></html>
