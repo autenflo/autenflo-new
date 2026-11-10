@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../layouts/Hero.astro';
+import { cities, industries, services, WA } from '../../data/places';
+export const getStaticPaths=()=>cities.map(c=>({params:{slug:c.slug},props:{c}}));
+const { c } = Astro.props;
+const biz=(c.biz||[]).map(n=>industries.find(i=>i.name===n)).filter(Boolean);
+const near=cities.filter(x=>x.state===c.state&&x.slug!==c.slug);
+const faq=[[`${c.name} me autenflo kya karta hai?`,`${c.name} ke business ke liye WhatsApp AI agent, auto follow-up, marketing aur payment reminder, Hindi me, 24x7.`],[`Setup me kitna time lagta hai?`,`Pehla kaam aam taur par 2 se 4 hafte me live ho jata hai. Launch plan ₹9,999 setup aur ₹2,999 per month se shuru hota hai.`],[`Kya ${c.name} me technical team chahiye?`,`Nahi. Aap bas batao ki kaam kaise chalta hai. Setup aur dekhbhal hamari zimmedari hai.`]];
+const ld={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))};
+const svc={'@type':'Service',name:`AI automation aur WhatsApp AI agent, ${c.name}`,serviceType:'AI business automation',provider:{'@id':'https://autenflo.com/#org'},areaServed:{'@type':'City',name:c.name,containedInPlace:{'@type':'AdministrativeArea',name:c.state}},description:c.tag,url:`https://autenflo.com/city/${c.slug}/`};
+const wa=`Namaste autenflo, main ${c.name} se hu. Mujhe AI se apne business ke kaam automate karne hain.`;
+---
+<Base title={`${c.name} me Business ke liye AI | autenflo`} desc={`${c.name}, ${c.state}: ${c.tag} WhatsApp AI agent, follow-up, marketing aur hisaab 24x7. Free demo.`} ld={[svc,ld]} crumbs={[['Home','/'],[c.state,'/#cities'],[c.name,`/city/${c.slug}/`]]}>
+<Hero h1={c.hello||c.name} sub={c.tag} c={c.c} m={c.slug} cta={wa}/>
+<div style={`--a:${c.c}`}>
+{c.essence&&<section class="wrap sec"><h2>{c.name} ki pehchaan</h2><div class="prose"><p>{c.essence}</p></div></section>}
+{c.known&&<section class="wrap sec"><h2>{c.name} kis liye jaana jaata hai</h2><ul class="k">{c.known.map(k=><li>{k}</li>)}</ul></section>}
+{c.pain&&<section class="wrap sec"><h2>{c.name} ke business ki asli problem</h2><div class="prose"><p>{c.pain}</p></div></section>}
+{biz.length>0&&<section class="wrap sec"><h2>{c.name} ke top business</h2><div class="grid">{biz.map(i=><a class="card" href={`/industry/${i.slug}/`}><b>{i.e} {i.name}</b><small>{i.line}</small></a>)}</div></section>}
+<section class="wrap sec"><h2>{c.name} me hum kya karte hain</h2><div class="grid">{services.map(s=><a class="card" href={`/service/${s.slug}/`}><b>{s.e} {s.name}</b><small>{s.line}</small></a>)}</div><br/><a class="btn wa" href={WA+encodeURIComponent(wa)}>{c.name} ke liye baat karein</a></section><section class="wrap sec"><h2>{c.name} ke sawal</h2>{faq.map(([q,a])=><details style="border-bottom:1px solid var(--line);padding:12px 0"><summary><b>{q}</b></summary><p class="mut">{a}</p></details>)}</section>
+<section class="wrap sec"><h2>{c.state} ke aur shehar</h2>{near.map(x=><a class="pill" href={`/city/${x.slug}/`}>{x.name}</a>)}</section>
+</div></Base>
